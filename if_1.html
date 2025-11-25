@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>if判別式</title>
+
+
+</head>
+<body>
+
+ <form name='form' id='form'>
+  Value  ：
+  <input type='number' name='EnglishScore' id='English' /> </br></br>
+
+</form>
+
+<button onclick="processFormData()">submit</button>
+
+    <script type="text/javascript">
+	
+	function processFormData() {
+	
+	var examNO = document.getElementById("English").value;;
+  // const name = nameElement.value;
+  // const emailElement = document.getElementById("email");
+  // const email = emailElement.value;
+
+        //var examNO = 61;
+
+        if (examNO >= 60) {
+            document.write('Score: '+examNO+'       及格！！');
+			
+			document.write("<h1>Hello World!</h1><p>Have a nice day!</p>");
+        }
+        else {
+            document.write('***抱歉！重修！！***');
+			
+        }
+}
+    </script>
+
+
+
+
+</body>
+</html>
