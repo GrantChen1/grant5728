@@ -22,11 +22,56 @@
                 <input id="pwd" name="password" type="password" placeholder="請輸入密碼" />
                 
             </div>
+
+            <!-- 新增日期欄位 -->
+            <div id="dateField" class="field">
+                <label for="dob">出生日期：</label>
+                <!-- type="date" 會顯示瀏覽器內建日期選擇器（支援的瀏覽器） -->
+                <input id="dob" name="birthdate" type="date"
+                       min="1900-01-01" max="2100-12-31"
+                       aria-label="出生日期" />
+            </div>
         </fieldset>
 
         <input type="submit" value="確定送出" />
     </form>
 
+<script>
+// Helper: format a Date object as "YYYY-MM-DD"
+function formatDateForInput(date) {
+  var y = date.getFullYear();
+  var m = String(date.getMonth() + 1).padStart(2, '0');
+  var d = String(date.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + d;
+}
+
+// On DOM ready: handle fallback for browsers that don't support input[type="date"]
+// and set the default value to today (only if the field is empty).
+document.addEventListener('DOMContentLoaded', function () {
+  var dob = document.getElementById('dob');
+  if (!dob) return;
+
+  // detect native date support
+  var inputTest = document.createElement('input');
+  inputTest.setAttribute('type', 'date');
+  var nativeDateSupported = (inputTest.type === 'date');
+
+  // If browser does NOT support date, change to text and add a placeholder (fallback)
+  if (!nativeDateSupported) {
+    dob.type = 'text';
+    // If you prefer placeholder instead of value for fallback, comment out the next line
+    dob.placeholder = 'YYYY-MM-DD';
+  }
+
+  // Set default value to today only if there's no prefilled value
+  if (!dob.value) {
+    var todayStr = formatDateForInput(new Date());
+    // For native date inputs, setting value uses "YYYY-MM-DD" format.
+    // For fallback text inputs we also set the same string so the server still receives the expected format.
+    dob.value = todayStr;
+  }
+});
+</script>
 
 </body>
 </html>
